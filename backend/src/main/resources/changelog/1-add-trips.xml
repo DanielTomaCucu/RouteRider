@@ -1,0 +1,20 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2" author="Toma">
+        <createTable tableName="trips">
+            <column name="route_id" type="INT"/>
+            <column name="service_id" type="VARCHAR(50)"/>
+            <column name="trip_id" type="VARCHAR(50)"/>
+            <column name="trip_headsign" type="VARCHAR(255)"/>
+            <column name="direction_id" type="INT"/>
+            <column name="shape_id" type="VARCHAR(100)"/>
+        </createTable>
+
+        <loadData tableName="trips" file="changelog/data/trips.csv" separator="," encoding="UTF-8"/>
+    </changeSet>
+</databaseChangeLog>

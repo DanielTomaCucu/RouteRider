@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="3" author="Toma">
+        <createTable tableName="routes">
+            <column name="agency_id" type="INT"/>
+            <column name="route_id" type="int"/>
+            <column name="route_short_name" type="VARCHAR(50)"/>
+            <column name="route_long_name" type="VARCHAR(255)"/>
+            <column name="route_desc" type="VARCHAR(50)"/>
+            <column name="route_type" type="int"/>
+            <column name="route_url" type="VARCHAR(50)"/>
+            <column name="route_color" type="VARCHAR(50)"/>
+            <column name="route_text_color" type="VARCHAR(50)"/>
+            <column name="route_sort_order" type="INT"/>
+        </createTable>
+
+        <loadData tableName="routes" file="changelog/data/routes.csv" separator="," encoding="UTF-8"/>
+    </changeSet>
+</databaseChangeLog>

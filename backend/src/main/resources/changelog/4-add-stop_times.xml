@@ -1,0 +1,19 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="5" author="Toma">
+        <createTable tableName="stops_times">
+            <column name="trip_id" type="VARCHAR(25)"/>
+            <column name="arrival_time" type="time"/>
+            <column name="departure_time" type="time"/>
+            <column name="stop_id" type="int"/>
+            <column name="stop_sequence" type="int"/>
+        </createTable>
+
+        <loadData tableName="stops_times" file="changelog/data/stop_times.csv" separator="," encoding="UTF-8"/>
+    </changeSet>
+</databaseChangeLog>
