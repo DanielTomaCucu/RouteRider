@@ -1,0 +1,21 @@
+# Java/Spring Boot
+/backend/target/
+*.class
+.mvn/
+mvnw
+mvnw.cmd
+
+# Ionic/Angular
+/frontend/node_modules/
+/frontend/www/
+/frontend/dist/
+/frontend/.angular/
+/frontend/.ionic/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Misc
+*.log
