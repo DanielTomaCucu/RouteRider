@@ -36,4 +36,67 @@ public class Routes {
     @Column(name = "route_sort_order")
     private int routeSortOrder;
 
+    public Integer getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(Integer routeId) {
+        this.routeId = routeId;
+    }
+
+    public String getRouteShortName() {
+        return routeShortName;
+    }
+
+    public void setRouteShortName(String routeShortName) {
+        this.routeShortName = routeShortName;
+    }
+
+    public String getRouteLongName() {
+        return routeLongName;
+    }
+
+    public void setRouteLongName(String routeLongName) {
+        this.routeLongName = routeLongName;
+    }
+
+    public String getRouteDesc() {
+        return routeDesc;
+    }
+
+    public void setRouteDesc(String routeDesc) {
+        this.routeDesc = routeDesc;
+    }
+
+    public String getRouteUrl() {
+        return routeUrl;
+    }
+
+    public void setRouteUrl(String routeUrl) {
+        this.routeUrl = routeUrl;
+    }
+
+    public String getRouteColor() {
+        return routeColor;
+    }
+
+    public void setRouteColor(String routeColor) {
+        this.routeColor = routeColor;
+    }
+
+    public String getRouteTextColor() {
+        return routeTextColor;
+    }
+
+    public void setRouteTextColor(String routeTextColor) {
+        this.routeTextColor = routeTextColor;
+    }
+
+    public int getRouteSortOrder() {
+        return routeSortOrder;
+    }
+
+    public void setRouteSortOrder(int routeSortOrder) {
+        this.routeSortOrder = routeSortOrder;
+    }
 }
