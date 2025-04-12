@@ -1,17 +1,36 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Routes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div *ngIf="isLoading" class="ion-padding ion-text-center">
+    <ion-spinner></ion-spinner>
+    <p>Loading routes...</p>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <ion-card *ngFor="let route of routes" [style.border-left]="'6px solid #' + route.routeColor">
+      <ion-card-header>
+        <ion-card-subtitle>Route {{route.routeShortName}}</ion-card-subtitle>
+        <ion-card-title>{{route.routeLongName}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p *ngIf="route.routeDescription">{{route.routeDescription}}</p>
+        <p *ngIf="!route.routeDescription" class="ion-text-muted">No description available</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-item *ngIf="routes.length === 0" class="ion-text-center">
+      <ion-label>
+        No routes available.
+      </ion-label>
+    </ion-item>
+  </div>
 </ion-content>
