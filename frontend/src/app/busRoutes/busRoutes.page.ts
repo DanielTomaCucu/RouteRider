@@ -3,12 +3,12 @@ import {RouteData} from "../interfaces/bus-routes";
 import {BusRoutesService} from "./bus-routes.service";
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
+  selector: 'app-busRoutes',
+  templateUrl: 'busRoutes.html',
+  styleUrls: ['busRoutes.scss'],
   standalone: false,
 })
-export class Tab1Page  implements OnInit{
+export class BusRoutesPage implements OnInit{
   routes: RouteData[] = [];
   isLoading = false;
 
