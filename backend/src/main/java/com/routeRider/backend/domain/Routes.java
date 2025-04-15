@@ -2,6 +2,7 @@ package com.routeRider.backend.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.util.RouteMatcher;
 
 @Entity
 @Getter
@@ -35,4 +36,7 @@ public class Routes {
 
     @Column(name = "route_sort_order")
     private int routeSortOrder;
+
+    /*@OneToMany(mappedBy = "route", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Trips> trips;*/
 }
