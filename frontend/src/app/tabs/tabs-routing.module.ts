@@ -9,7 +9,16 @@ const routes: Routes = [
     children: [
       {
         path: 'busRoutes',
-        loadChildren: () => import('../busRoutes/busRoutes.module').then(m => m.BusRoutesModule)
+        children:[
+          {
+          path: '',
+          loadChildren: () => import('../busRoutes/busRoutes.module').then(m => m.BusRoutesModule)
+          },
+          {
+            path: ':routeId/stops',
+            loadChildren: () => import('../busRoutes/stops/stops.module').then(m => m.StopsModule)
+          }
+        ],
       },
       {
         path: 'tab2',

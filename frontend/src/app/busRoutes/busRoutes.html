@@ -15,7 +15,7 @@
   </div>
 
   <div *ngIf="!isLoading">
-    <ion-card *ngFor="let route of routes" [style.border-left]="'6px solid #' + route.routeColor">
+    <ion-card *ngFor="let route of routes" (click)="goToStops(route.routeId)" [style.border-left]="'6px solid #' + route.routeColor">
       <ion-card-header>
         <ion-card-subtitle>Route {{route.routeShortName}}</ion-card-subtitle>
         <ion-card-title>{{route.routeLongName}}</ion-card-title>
@@ -33,4 +33,6 @@
       </ion-label>
     </ion-item>
   </div>
+
 </ion-content>
+

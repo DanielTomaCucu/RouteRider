@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.util.RouteMatcher;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,8 +20,9 @@ public class Trips {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private String tripId;
 
-    @Column(name = "route_id")
-    private Integer routeId;
+    @ManyToOne
+    @JoinColumn(name = "route_id", nullable = false)
+    private Routes route;
 
     @Column( name = "service_id")
     private String serviceId;
@@ -31,5 +35,8 @@ public class Trips {
 
     @Column(name = "shape_id")
     private String shapeId;
+
+    @OneToMany(mappedBy = "trips", cascade = CascadeType.ALL)
+    private List<StopTimes> stopTimes ;
 
 }

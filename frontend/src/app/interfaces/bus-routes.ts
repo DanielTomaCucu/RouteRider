@@ -6,3 +6,18 @@ export interface RouteData {
   routeColor: string;
   routeTextColor: string;
 }
+
+export interface Stops {
+  stopId: number;
+  stopName: string;
+  stopDescription: string;
+  stopLat: number;
+  stopLon: number;
+  stopUrl: string;
+  stopTimes: StopsTimes[];
+}
+
+export interface StopsTimes {
+  arrivalTime: string;
+  departureTime: string;
+}

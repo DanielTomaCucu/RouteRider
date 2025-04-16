@@ -2,6 +2,10 @@ package com.routeRider.backend.mapper;
 
 import com.routeRider.backend.domain.Routes;
 import com.routeRider.backend.dto.RoutesDTO;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

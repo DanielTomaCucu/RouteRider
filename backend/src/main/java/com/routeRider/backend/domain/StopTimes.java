@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,8 +23,9 @@ public class StopTimes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer stop_sequence;
 
-    @Column(name = "trip_id")
-    private String tripId;
+    @ManyToOne
+    @JoinColumn(name = "trip_id", nullable = false)
+    private Trips trips;
 
     @Column(name = "arrival_time")
     private LocalTime arrivalTime;
@@ -31,7 +33,8 @@ public class StopTimes {
     @Column(name = "departure_time")
     private LocalTime departureTime;
 
-    @Column(name = "stop_id")
-    private Integer stopId;
+   @ManyToOne
+   @JoinColumn(name = "stop_id" , nullable = false)
+    private Stops stopId;
 
 }
