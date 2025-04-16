@@ -6,6 +6,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 @Configuration
 public class CorsConfig {
 
@@ -14,31 +17,41 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 
-        // Development environments
-        config.addAllowedOrigin("http://localhost:8100");
-        config.addAllowedOrigin("http://localhost:4200");
+        // Allow requests from these origins
+        config.setAllowedOriginPatterns(Arrays.asList(
+                "http://localhost:[*]",     // Any localhost port
+                "http://127.0.0.1:[*]",     // Any 127.0.0.1 port
+                "capacitor://localhost",    // For Ionic Capacitor
+                "ionic://localhost",        // For older Ionic
+                "https://routerider.onrender.com" // Production domain
+        ));
 
-        // Production environments - add your actual domain
-        config.addAllowedOrigin("https://yourappdomain.com");
-
-        // Or for testing, you might want to allow requests from any origin
-        // config.addAllowedOrigin("*");  // Be careful with this in production
-
-        // Allow common HTTP methods
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("POST");
-        config.addAllowedMethod("PUT");
-        config.addAllowedMethod("DELETE");
-        config.addAllowedMethod("OPTIONS");
+        // Allow all common methods
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
         // Allow all headers
-        config.addAllowedHeader("*");
+        config.setAllowedHeaders(Arrays.asList(
+                "Origin",
+                "Content-Type",
+                "Accept",
+                "Authorization",
+                "X-Requested-With",
+                "Access-Control-Request-Method",
+                "Access-Control-Request-Headers"
+        ));
 
-        // Allow credentials if your app uses cookies or authentication
-        config.setAllowCredentials(true);
+        // Expose these headers to the browser
+        config.setExposedHeaders(Arrays.asList(
+                "Access-Control-Allow-Origin",
+                "Access-Control-Allow-Credentials",
+                "Authorization"
+        ));
 
-        // How long the browser should cache the CORS response (in seconds)
+        // Set max age for preflight requests (browser caching of OPTIONS responses)
         config.setMaxAge(3600L);
+
+        // Allow cookies for authenticated requests
+        config.setAllowCredentials(true);
 
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);

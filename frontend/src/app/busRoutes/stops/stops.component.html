@@ -1,0 +1,95 @@
+<!-- stops.component.html -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/busRoutes"></ion-back-button>
+    </ion-buttons>
+    <ion-icon name="bus-outline" slot="start"></ion-icon>
+    <ion-title>Route {{routeId}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Direction segment selector -->
+  <div class="segment-container">
+    <ion-segment [(ngModel)]="currentDirection" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="outbound">
+        <ion-label>
+          <ion-icon name="arrow-forward-circle-outline" class="segment-icon"></ion-icon>
+          Outbound
+        </ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="inbound">
+        <ion-label>
+          <ion-icon name="arrow-back-circle-outline" class="segment-icon"></ion-icon>
+          Inbound
+        </ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <!-- Loading indicator -->
+  <div class="loading-container" *ngIf="!displayedStops.length">
+    <ion-spinner name="circles"></ion-spinner>
+    <p>Loading stops...</p>
+  </div>
+
+  <!-- Timeline and stops list -->
+  <div class="timeline-container" *ngIf="displayedStops.length">
+    <!-- Timeline line with dynamic color based on direction -->
+    <div class="timeline-line" [ngStyle]="{'background-color': currentDirection === 'outbound' ? '#10B981' : '#3B82F6'}"></div>
+
+    <!-- Loop through stops -->
+    <div class="stop-list">
+      <div class="stop-item" *ngFor="let stop of displayedStops; let i = index; let isEven = even">
+        <ion-card [ngClass]="{'even-card': isEven}">
+          <div class="card-content">
+            <!-- Timeline dot -->
+            <div class="dot-container">
+              <div class="timeline-dot" [ngStyle]="{'background-color': currentDirection === 'outbound' ? '#10B981' : '#3B82F6'}"></div>
+            </div>
+
+            <!-- Stop details -->
+            <div class="stop-details">
+              <h3 class="stop-name">{{ stop.stopName }}</h3>
+
+              <!-- Bus times -->
+              <div class="time-badges">
+                <!-- Last bus time (crossed out) -->
+                <div class="time-badge past-time" *ngIf="stop.stopTimes && stop.stopTimes.length > 0">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <span>{{ formatTime(stop.stopTimes[0]?.arrivalTime) }}</span>
+                </div>
+
+                <!-- Next bus time -->
+                <div class="time-badge next-time" [ngStyle]="{'background-color': currentDirection === 'outbound' ? '#10B981' : '#3B82F6'}" *ngIf="stop.stopTimes && stop.stopTimes.length > 1">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <span>{{ formatTime(stop.stopTimes[1]?.arrivalTime) }}</span>
+                </div>
+
+                <!-- Arrow between times -->
+                <div class="arrow" *ngIf="stop.stopTimes && stop.stopTimes.length > 2">
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                </div>
+
+                <!-- Following bus time -->
+                <div class="time-badge following-time" *ngIf="stop.stopTimes && stop.stopTimes.length > 2">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <span>{{ formatTime(stop.stopTimes[2]?.arrivalTime) }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state" *ngIf="displayedStops.length === 0 && (outboundStops.length > 0 || inboundStops.length > 0)">
+    <ion-icon name="bus-outline" class="empty-icon"></ion-icon>
+    <h3>No stops found</h3>
+    <p>There are no stops available for this route direction.</p>
+  </div>
+</ion-content>

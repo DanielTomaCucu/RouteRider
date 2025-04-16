@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -32,5 +34,9 @@ public class Stops {
 
     @Column(name = "stop_url")
     private String stopUrl;
+
+    @OneToMany(mappedBy = "stopId", cascade = CascadeType.ALL)
+    private List<StopTimes> stopTimes;
+
 
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteData} from "../interfaces/bus-routes";
 import {BusRoutesService} from "./bus-routes.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-busRoutes',
@@ -12,7 +13,7 @@ export class BusRoutesPage implements OnInit{
   routes: RouteData[] = [];
   isLoading = false;
 
-  constructor(private busRoutesService: BusRoutesService) {}
+  constructor(private busRoutesService: BusRoutesService, private router: Router) {}
 
   ngOnInit() {
     this.loadRoutes();
@@ -39,5 +40,10 @@ export class BusRoutesPage implements OnInit{
     setTimeout(() => {
       event.target.complete();
     }, 1000);
+  }
+
+  goToStops(routeId:number){
+    this.router.navigate(['/tabs/busRoutes', routeId, 'stops']);
+
   }
 }
