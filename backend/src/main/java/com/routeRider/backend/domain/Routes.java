@@ -2,7 +2,6 @@ package com.routeRider.backend.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.util.RouteMatcher;
 
 import java.util.List;
 
