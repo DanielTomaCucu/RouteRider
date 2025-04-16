@@ -1,9 +1,6 @@
 # Java/Spring Boot
 /backend/target/
 *.class
-.mvn/
-mvnw
-mvnw.cmd
 
 # Ionic/Angular
 /frontend/node_modules/
